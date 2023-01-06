@@ -17,7 +17,9 @@ class Ground:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.ground = pygame.draw.rect(DISPLAY,"white",(0,250,600,500))
+        #self.ground = pygame.draw.rect(DISPLAY,"white",(0,250,600,500))
+
+ground = Ground(0,250)
 
 
 #Ground.x = 0
@@ -31,7 +33,7 @@ class Ground:
 
 while True:
     DISPLAY.fill(RED)
-    DISPLAY.blit(ground.ground, (0, ground.y))
+    pygame.draw.rect(DISPLAY,"white",(ground.x,ground.y,600,500))
     pygame.draw.rect(DISPLAY,"black",(30,185,30,65))
     pygame.draw.rect(DISPLAY,"green",(150,220,30,30))
     pygame.draw.rect(DISPLAY,"green",(350,210,30,40))
