@@ -64,9 +64,13 @@ def controlDino():
             if event.key == pygame.K_SPACE:
                 dino.jump()
 
-        #if event.key == pygame.K_d:
-            #if car1.x < DISPLAY.get_width() - car1.car.get_width():
-                #car1.move_right()
+def collision():
+    for cactus in cacti:
+        if abs(dino.x - cactus.x) <= 10:
+            print (dino.y +85, cactus.y)
+            if dino.y + 85 > cactus.y:
+                DISPLAY.fill("black")
+    
 
 float = 0
 
@@ -81,7 +85,7 @@ while True:
     controlDino()
     if dino.jumping:
         dino.y-=1
-    if dino.y < 125:
+    if dino.y < 120:
         dino.jumping = False
         dino.float = True
     if dino.float:
@@ -94,4 +98,5 @@ while True:
         dino.y+=1
     if dino.y >= 185:
         dino.coming_down = False
+    collision()
     pygame.display.update()
