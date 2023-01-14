@@ -3,12 +3,18 @@ from pygame.locals import QUIT
 import random
 import time
 
+game = "playing"
+
 pygame.init()
 
 DISPLAY = pygame.display.set_mode((600, 400))
 pygame.display.set_caption('Chrome Dino')
-score = 0
-score = "SCORE:", score
+
+font = pygame.font.SysFont("Times New Roman",25)
+bigFont = pygame.font.SysFont("Times New Roman" , 40)
+
+LosingText = bigFont.render("GAME OVER",False, "black")
+
 
 # colors
 RED = (200, 0, 0)
@@ -29,6 +35,8 @@ class Dino:
         self.coming_down = False
         self.float = False
         self.dino = pygame.draw.rect(DISPLAY,"black",(30,185,30,65))
+        self.condition = "alive"
+        self.score = 0
 
     def jump(self):
         self.jumping = True
@@ -41,7 +49,7 @@ dino = Dino(30,185)
 
 cactus1 = Cactus(150,220,30)
 cactus2 = Cactus(350,210,40)
-cactus3 = Cactus(550,200,50)
+cactus3 = Cactus(550,205,45)
 
 cacti = [cactus1,cactus2,cactus3]
 
@@ -62,14 +70,14 @@ def controlDino():
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                dino.jump()
+                if not dino.coming_down:
+                    dino.jump()
 
 def collision():
     for cactus in cacti:
         if abs(dino.x - cactus.x) <= 10:
-            print (dino.y +85, cactus.y)
             if dino.y + 85 > cactus.y:
-                DISPLAY.fill("black")
+                dino.condition = "dead"
     
 
 float = 0
@@ -99,4 +107,11 @@ while True:
     if dino.y >= 185:
         dino.coming_down = False
     collision()
+    if dino.condition == "dead":
+        DISPLAY.fill("red")
+        ScoreText = font.render(f"Score:{dino.score}",False, "black")
+        DISPLAY.blit(ScoreText,(10,65))
+        DISPLAY.blit(LosingText,(10,20))
+    else:
+        dino.score += 1
     pygame.display.update()
