@@ -10,7 +10,11 @@ pygame.init()
 dino_img = pygame.image.load("dino.png")
 dino_img = pygame.transform.scale(dino_img,(30,65))
 cactus_img = pygame.image.load("Cactus.png")
-cactus_img = pygame.transform.scale(cactus_img,(30,30))
+cactus_img = pygame.transform.scale(cactus_img,(40,30))
+cactus_img2 = pygame.transform.scale(cactus_img,(40,40))
+cactus_img3 = pygame.transform.scale(cactus_img,(40,45))
+
+cacti_img = [cactus_img,cactus_img2,cactus_img3]
 
 DISPLAY = pygame.display.set_mode((600, 400))
 pygame.display.set_caption('Chrome Dino')
@@ -89,13 +93,14 @@ float = 0
 
 while True:
     clock.tick(60)
-    DISPLAY.fill(RED)
-    pygame.draw.rect(DISPLAY,"white",(0,250,600,500))
+    DISPLAY.fill("white")
+    pygame.draw.rect(DISPLAY,"black",(0,250,600,10))
     #pygame.draw.rect(DISPLAY,"black",(dino.x,dino.y,30,65))
     DISPLAY.blit(dino_img,(dino.x,dino.y))
-    DISPLAY.blit(cactus_img,(cactus.x,cactus.y))
-    for cactus in cacti:
-        pygame.draw.rect(DISPLAY,"green",(cactus.x,cactus.y,30,cactus.l))
+    #DISPLAY.blit(cactus_img,(cactus.x,cactus.y))
+    for index,cactus in enumerate(cacti):
+        #pygame.draw.rect(DISPLAY,"green",(cactus.x,cactus.y,30,cactus.l))
+        DISPLAY.blit(cacti_img[index],(cactus.x,cactus.y))
     shiftcactus()
     controlDino()
     if dino.jumping:
