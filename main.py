@@ -7,6 +7,11 @@ game = "playing"
 
 pygame.init()
 
+dino_img = pygame.image.load("dino.png")
+dino_img = pygame.transform.scale(dino_img,(30,65))
+cactus_img = pygame.image.load("Cactus.png")
+cactus_img = pygame.transform.scale(cactus_img,(30,30))
+
 DISPLAY = pygame.display.set_mode((600, 400))
 pygame.display.set_caption('Chrome Dino')
 
@@ -47,11 +52,11 @@ class Dino:
         
 dino = Dino(30,185)
 
-cactus1 = Cactus(150,220,30)
+cactus = Cactus(150,220,30)
 cactus2 = Cactus(350,210,40)
 cactus3 = Cactus(550,205,45)
 
-cacti = [cactus1,cactus2,cactus3]
+cacti = [cactus,cactus2,cactus3]
 
 clock = pygame.time.Clock()
 
@@ -86,7 +91,9 @@ while True:
     clock.tick(60)
     DISPLAY.fill(RED)
     pygame.draw.rect(DISPLAY,"white",(0,250,600,500))
-    pygame.draw.rect(DISPLAY,"black",(dino.x,dino.y,30,65))
+    #pygame.draw.rect(DISPLAY,"black",(dino.x,dino.y,30,65))
+    DISPLAY.blit(dino_img,(dino.x,dino.y))
+    DISPLAY.blit(cactus_img,(cactus.x,cactus.y))
     for cactus in cacti:
         pygame.draw.rect(DISPLAY,"green",(cactus.x,cactus.y,30,cactus.l))
     shiftcactus()
