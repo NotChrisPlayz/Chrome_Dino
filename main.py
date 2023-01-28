@@ -86,7 +86,7 @@ def handle_dino():
         dino.float = True
     if dino.float:
         dino.float_energy += 1
-        if dino.float_energy > 50:
+        if dino.float_energy > 10 :
             dino.float = False
             dino.come_down()
             dino.float_energy = 0
@@ -98,7 +98,7 @@ def handle_dino():
 clock = pygame.time.Clock()
 
 while True:
-    clock.tick(60)
+    clock.tick(150)
     DISPLAY.fill("white")
     pygame.draw.rect(DISPLAY,"black",(0,250,600,10))
     DISPLAY.blit(dino_img,(dino.x,dino.y))
@@ -116,4 +116,5 @@ while True:
         DISPLAY.blit(LosingText,(10,20))
     else:
         dino.score += 1
+    
     pygame.display.update()
