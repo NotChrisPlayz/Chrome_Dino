@@ -2,6 +2,10 @@ import pygame, sys
 from pygame.locals import QUIT
 
 pygame.init()
+pygame.mixer.init()
+
+jumpSound = pygame.mixer.Sound("jump.mp3")
+
 DISPLAY = pygame.display.set_mode((600, 400))
 pygame.display.set_caption('Chrome Dino')
 
@@ -70,6 +74,7 @@ def controlDino():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 if not dino.coming_down:
+                    pygame.mixer.Sound.play(jumpSound)
                     dino.jump()
 
 def collision():
