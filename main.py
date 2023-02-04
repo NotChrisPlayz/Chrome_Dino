@@ -82,7 +82,7 @@ def collision():
         if abs(dino.x - cactus.x) <= 10:
             if dino.y + 85 > cactus.y:
                 dino.condition = "dead"
-
+                
 def handle_dino():
     if dino.jumping:
         dino.y-=1
@@ -103,7 +103,7 @@ def handle_dino():
 clock = pygame.time.Clock()
 
 while True:
-    clock.tick(130)
+    clock.tick(100)
     DISPLAY.fill("white")
     pygame.draw.rect(DISPLAY,"black",(0,250,600,10))
     DISPLAY.blit(dino_img,(dino.x,dino.y))
@@ -115,6 +115,17 @@ while True:
     handle_dino()
     collision()
     if dino.condition == "dead":
+        file = open("highScore.txt","r")
+        highScore = file.read()
+        file.close()
+        highScore = int(highScore)
+        if highScore < dino.score:
+            print("New Highscore")
+            file = open("highScore.txt","w")
+            file.write(str(dino.score))
+            file.close()
+        else:
+            print("play again")
         DISPLAY.fill("white")
         ScoreText = font.render(f"Score:{dino.score}",False, "black")
         DISPLAY.blit(ScoreText,(10,65))
