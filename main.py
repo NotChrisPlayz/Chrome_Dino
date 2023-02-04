@@ -103,7 +103,7 @@ def handle_dino():
 clock = pygame.time.Clock()
 
 while True:
-    clock.tick(150)
+    clock.tick(130)
     DISPLAY.fill("white")
     pygame.draw.rect(DISPLAY,"black",(0,250,600,10))
     DISPLAY.blit(dino_img,(dino.x,dino.y))
